@@ -1,1 +1,114 @@
-placeholder
+/* Dresden panorama and realistic cake overrides */
+.hero-scene {
+  background-image:
+    linear-gradient(90deg, rgba(8,3,15,.92) 0%, rgba(8,3,15,.75) 42%, rgba(8,3,15,.40) 100%),
+    url('/photos/dresden-elbe-bg.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 72% 48%, rgba(255,255,255,.18), transparent 22%), linear-gradient(180deg, rgba(8,3,15,.05), rgba(8,3,15,.58));
+  pointer-events: none;
+}
+
+.cake-card {
+  background: radial-gradient(circle at 50% 18%, rgba(255,255,255,.34), transparent 22%), linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.07));
+}
+
+.cake-layer {
+  background-color: #7f1d1d;
+  box-shadow: inset 0 -34px 0 rgba(69, 10, 10, .28), inset 0 20px 0 rgba(255,255,255,.20), 0 28px 58px rgba(0,0,0,.38);
+}
+
+.cake-layer-bottom {
+  background: radial-gradient(circle at 32% 32%, rgba(255,255,255,.24), transparent 7%), radial-gradient(circle at 68% 42%, rgba(255,255,255,.18), transparent 8%), linear-gradient(180deg, #d97706 0%, #92400e 48%, #451a03 100%);
+}
+
+.cake-layer-middle {
+  background: radial-gradient(circle at 30% 32%, rgba(255,255,255,.22), transparent 8%), radial-gradient(circle at 70% 48%, rgba(255,255,255,.16), transparent 9%), linear-gradient(180deg, #f59e0b 0%, #b45309 52%, #78350f 100%);
+}
+
+.cake-layer-top {
+  background: radial-gradient(circle at 42% 28%, rgba(255,255,255,.28), transparent 9%), linear-gradient(180deg, #fde68a 0%, #f59e0b 55%, #b45309 100%);
+}
+
+.cake-layer::before {
+  background: linear-gradient(180deg, #fffaf0, #f5d0a9 56%, #f8b4c0);
+  height: 42px;
+  box-shadow: 0 10px 22px rgba(255,255,255,.24), inset 0 -8px 0 rgba(244,63,94,.16);
+}
+
+.cream-drop {
+  position: absolute;
+  top: 18px;
+  width: 24px;
+  height: 46px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fffaf0, #f8b4c0);
+  box-shadow: 0 8px 16px rgba(0,0,0,.14);
+}
+
+.drop-a { left: 22%; height: 42px; }
+.drop-b { left: 49%; height: 62px; }
+.drop-c { left: 73%; height: 38px; }
+.drop-d { left: 15%; height: 58px; }
+.drop-e { left: 43%; height: 44px; }
+.drop-f { left: 77%; height: 66px; }
+.drop-g { left: 18%; height: 70px; }
+.drop-h { left: 51%; height: 52px; }
+.drop-i { left: 82%; height: 46px; }
+
+.cake-berries {
+  position: absolute;
+  left: 50%;
+  bottom: 354px;
+  width: 210px;
+  height: 50px;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+.cake-berries span {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 30%, #fecdd3 0 18%, #e11d48 22% 68%, #881337 100%);
+  box-shadow: 0 8px 15px rgba(136,19,55,.42);
+}
+
+.cake-berries span:nth-child(1) { left: 18px; top: 10px; }
+.cake-berries span:nth-child(2) { left: 58px; top: 0; }
+.cake-berries span:nth-child(3) { left: 96px; top: 15px; }
+.cake-berries span:nth-child(4) { left: 138px; top: 3px; }
+.cake-berries span:nth-child(5) { left: 174px; top: 16px; }
+
+.cake-front-name {
+  background: linear-gradient(180deg, #fffaf0, #fde68a);
+  color: #7c2d12;
+}
+
+.number-topper {
+  color: #fff7ed;
+  text-shadow: 0 0 0 #92400e, 0 4px 0 #92400e, 0 0 24px rgba(251,191,36,.9), 0 24px 44px rgba(0,0,0,.45);
+}
+
+.years-ribbon {
+  background: linear-gradient(180deg, #fff7ad, #facc15);
+  color: #451a03;
+}
+
+.candle-new {
+  background: repeating-linear-gradient(45deg, #fff7ed, #fff7ed 8px, #e11d48 8px, #e11d48 16px);
+}
+
+.elbe-postcard {
+  background-image: linear-gradient(180deg, rgba(125,211,252,.10) 0%, rgba(253,230,138,.10) 52%, rgba(15,23,42,.20) 53%, rgba(30,58,138,.25) 100%), url('/photos/dresden-elbe-bg.webp');
+  background-size: cover;
+  background-position: center;
+}
