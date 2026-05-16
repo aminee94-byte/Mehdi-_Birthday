@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Camera, Heart, MapPin, Sparkles } from 'lucide-react';
 import { birthdayPhotos, elbePhoto } from './data/photos';
 
@@ -17,10 +18,10 @@ const wishes = [
 ];
 
 const fallbackPhotos = [
-  { title: 'Our photo over the Elbe', caption: 'Photo from the birthday zip will appear here.', src: '' },
-  { title: 'Mehdi birthday photo', caption: 'Photo from the birthday zip will appear here.', src: '' },
-  { title: 'Amine and Mehdi', caption: 'Photo from the birthday zip will appear here.', src: '' },
-  { title: 'Jihade memory', caption: 'Photo from the birthday zip will appear here.', src: '' },
+  { title: 'Our photo over the Elbe', caption: 'A place for the Elbe picture.', src: '' },
+  { title: 'Mehdi birthday photo', caption: 'A place for Mehdi’s birthday picture.', src: '' },
+  { title: 'Amine and Mehdi', caption: 'A place for a memory with Amine and Mehdi.', src: '' },
+  { title: 'Jihade memory', caption: 'A place for Jihade’s birthday memory.', src: '' },
 ];
 
 const visiblePhotos = birthdayPhotos.length > 0 ? birthdayPhotos : fallbackPhotos;
@@ -39,16 +40,19 @@ const jihadeMessage = [
 ];
 
 function PhotoSlot({ title, caption, src }: { title: string; caption: string; src: string }) {
+  const [failed, setFailed] = useState(false);
+  const showImage = src && !failed;
+
   return (
     <article className="photo-card group">
       <div className="photo-window">
-        {src ? (
-          <img src={src} alt={title} />
+        {showImage ? (
+          <img src={src} alt={title} onError={() => setFailed(true)} />
         ) : (
           <div className="photo-placeholder">
             <Camera className="h-10 w-10" />
-            <span>Add photo</span>
-            <small>src/data/photos.ts</small>
+            <span>Photo space</span>
+            <small>Ready for the real picture</small>
           </div>
         )}
       </div>
@@ -57,6 +61,23 @@ function PhotoSlot({ title, caption, src }: { title: string; caption: string; sr
         <p className="mt-3 text-sm leading-6 text-white/70">{caption}</p>
       </div>
     </article>
+  );
+}
+
+function ElbeImageFrame() {
+  const [failed, setFailed] = useState(false);
+  const showImage = elbePhoto?.src && !failed;
+
+  if (showImage) {
+    return <img src={elbePhoto.src} alt={elbePhoto.title} onError={() => setFailed(true)} className="h-full w-full object-cover" />;
+  }
+
+  return (
+    <div className="photo-placeholder big">
+      <Camera className="h-12 w-12" />
+      <span>Elbe photo space</span>
+      <small>Ready for the real picture</small>
+    </div>
   );
 }
 
@@ -73,9 +94,6 @@ function CakeScene() {
         <div className="hero-copy">
           <div className="pill"><Sparkles className="h-4 w-4" /> Made by {senderName} for {birthdayBoy}</div>
           <h1>Mehdi turns 25</h1>
-          <p>
-            A private birthday celebration for Mehdi, with Dresden, the Elbe, real memories, birthday wishes, and a message from Amine.
-          </p>
           <div className="hero-actions">
             <a href="#elbe">Elbe photo</a>
             <a href="#message">Read the message</a>
@@ -123,9 +141,6 @@ function ElbeSection() {
       <div className="section-heading">
         <div className="pill"><MapPin className="h-4 w-4" /> Dresden over the Elbe</div>
         <h2>A picture over the Elbe</h2>
-        <p>
-          This section is built like a Dresden postcard. Your selected photo from the zip appears in the frame.
-        </p>
       </div>
 
       <div className="elbe-postcard">
@@ -133,15 +148,7 @@ function ElbeSection() {
         <div className="river" aria-hidden="true" />
         <div className="bridge" aria-hidden="true" />
         <div className="elbe-photo-frame">
-          {elbePhoto?.src ? (
-            <img src={elbePhoto.src} alt={elbePhoto.title} className="h-full w-full object-cover" />
-          ) : (
-            <div className="photo-placeholder big">
-              <Camera className="h-12 w-12" />
-              <span>Add your Elbe photo here</span>
-              <small>src/data/photos.ts</small>
-            </div>
-          )}
+          <ElbeImageFrame />
         </div>
         <div className="postcard-label">Dresden, Germany</div>
       </div>
@@ -159,7 +166,6 @@ export default function App() {
         <div className="section-heading light">
           <div className="pill dark"><Camera className="h-4 w-4" /> Our pictures</div>
           <h2>Our photo wall</h2>
-          <p>Real memories from the birthday photo collection.</p>
         </div>
         <div className="photo-grid">
           {visiblePhotos.map((slot) => <PhotoSlot key={slot.title} {...slot} />)}
