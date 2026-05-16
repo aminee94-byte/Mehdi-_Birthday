@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Camera } from 'lucide-react';
 import { photoCards } from '../data/museumContent';
-import type { PhotoCard } from '../data/museumContent';
 import { SectionHeader } from './SectionHeader';
 
 export function PhotoGallery() {
@@ -15,7 +14,7 @@ export function PhotoGallery() {
           icon={Camera}
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {photoCards.map((photo: PhotoCard, index: number) => (
+          {photoCards.map((photo, index) => (
             <motion.article
               key={photo.title}
               initial={{ opacity: 0, y: 24 }}

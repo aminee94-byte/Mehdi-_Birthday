@@ -40,7 +40,7 @@ export function BirthdayCelebration() {
 
           <div className="grid gap-5">
             <div className="grid gap-4 sm:grid-cols-2">
-              {birthdayCelebration.highlights.map((highlight: string, index: number) => (
+              {birthdayCelebration.highlights.map((highlight, index) => (
                 <motion.div
                   key={highlight}
                   initial={{ opacity: 0, y: 20 }}
@@ -64,7 +64,7 @@ export function BirthdayCelebration() {
             >
               <h3 className="text-2xl font-black text-stone-950">Birthday wishes</h3>
               <div className="mt-5 space-y-4">
-                {birthdayCelebration.wishes.map((wish: string) => (
+                {birthdayCelebration.wishes.map((wish) => (
                   <div key={wish} className="flex gap-3 rounded-2xl bg-rose-50 p-4 text-stone-700">
                     <Gift className="mt-0.5 h-5 w-5 shrink-0 text-rose-600" />
                     <p className="font-semibold leading-7">{wish}</p>

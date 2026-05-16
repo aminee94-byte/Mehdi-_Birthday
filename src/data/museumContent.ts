@@ -62,71 +62,6 @@ export const memories: Memory[] = [
   },
 ];
 
-export type PhotoCard = {
-  title: string;
-  caption: string;
-  imageSrc: string;
-  alt: string;
-};
-
-// EDIT HERE: Add your own photos here. Put image files in public/photos and set imageSrc like '/photos/your-photo.jpg'.
-// Leave imageSrc as an empty string to show a beautiful placeholder card until you add the real picture.
-export const photoCards: PhotoCard[] = [
-  {
-    title: 'The birthday icon shot',
-    caption: 'Replace this with a photo where he looks like the main character he obviously is.',
-    imageSrc: '',
-    alt: 'Placeholder for a favorite birthday photo',
-  },
-  {
-    title: 'The friendship proof',
-    caption: 'A photo that says: yes, this friendship has survived many eras and questionable decisions.',
-    imageSrc: '',
-    alt: 'Placeholder for a photo of friends together',
-  },
-  {
-    title: 'The chaotic memory',
-    caption: 'Use this for the picture that needs zero explanation and somehow too much explanation.',
-    imageSrc: '',
-    alt: 'Placeholder for a funny chaotic memory photo',
-  },
-  {
-    title: 'The proud moment',
-    caption: 'A picture for one of his wins, glow-ups, achievements, or tiny legendary moments.',
-    imageSrc: '',
-    alt: 'Placeholder for a proud friend moment photo',
-  },
-];
-
-export type BirthdayCelebrationContent = {
-  age: number;
-  dateLabel: string;
-  headline: string;
-  intro: string;
-  wishes: string[];
-  highlights: string[];
-};
-
-// EDIT HERE: Birthday celebration details. The date below uses May 24, 2026 for 24/05/2026.
-export const birthdayCelebration: BirthdayCelebrationContent = {
-  age: 25,
-  dateLabel: 'May 24, 2026',
-  headline: 'Happy 25th Birthday',
-  intro:
-    'This birthday wing is dedicated to celebrating him properly: the growth, the jokes, the wins, the glow-up, and the fact that 25 looks suspiciously good on him.',
-  wishes: [
-    'May 25 bring stronger confidence, calmer days, bigger wins, and better screenshots.',
-    'May every goal feel closer, every gym session count, and every dream get a little louder.',
-    'May life keep giving him reasons to laugh, level up, and remember how loved he is.',
-  ],
-  highlights: [
-    '25 years of lore',
-    '25 years of becoming',
-    '25 reasons to celebrate',
-    '1 friend museum made with love',
-  ],
-};
-
 // EDIT HERE: Add, remove, or rewrite compliments. The generator chooses randomly from this array.
 export const compliments: string[] = [
   'You have elite-level best friend energy. Scientists are confused. I am simply grateful.',
@@ -225,13 +160,11 @@ export const museumStats = [
   { label: 'Rare friend rating', value: '10/10', icon: Award },
   { label: 'Chaos survived', value: '∞', icon: Rocket },
   { label: 'Good memories', value: 'Too many', icon: HeartHandshake },
-  { label: 'Birthday age', value: '25', icon: Gift },
+  { label: 'Secret exhibits', value: '1', icon: Gift },
 ];
 
 export const navItems = [
   { label: 'Timeline', href: '#timeline', icon: MapPin },
-  { label: 'Photos', href: '#photos', icon: Camera },
-  { label: 'Birthday', href: '#birthday', icon: Gift },
   { label: 'Compliments', href: '#compliments', icon: Sparkles },
   { label: 'Jokes', href: '#jokes', icon: Laugh },
   { label: 'Quiz', href: '#quiz', icon: Trophy },
