@@ -28,3 +28,206 @@ a {
 ::selection {
   background: rgba(244, 63, 94, 0.22);
 }
+
+.cake-stage {
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.skyline {
+  position: absolute;
+  inset-inline: 8%;
+  bottom: 34px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 14px;
+  opacity: 0.35;
+}
+
+.skyline span {
+  display: block;
+  width: 46px;
+  background: linear-gradient(180deg, #0f172a, #334155);
+  border-radius: 18px 18px 4px 4px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.2);
+}
+
+.skyline span:nth-child(1) {
+  height: 90px;
+}
+
+.skyline span:nth-child(2) {
+  height: 145px;
+  border-radius: 999px 999px 4px 4px;
+}
+
+.skyline span:nth-child(3) {
+  height: 190px;
+  width: 70px;
+  clip-path: polygon(50% 0, 100% 34%, 100% 100%, 0 100%, 0 34%);
+}
+
+.skyline span:nth-child(4) {
+  height: 125px;
+}
+
+.skyline span:nth-child(5) {
+  height: 75px;
+}
+
+.cake-scene {
+  position: relative;
+  height: 470px;
+  transform-style: preserve-3d;
+  animation: cake-float 5s ease-in-out infinite;
+}
+
+.cake-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 62px;
+  width: 300px;
+  height: 52px;
+  transform: translateX(-50%) rotateX(72deg);
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.18);
+  filter: blur(10px);
+}
+
+.cake {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotateX(58deg) rotateZ(-1deg);
+  border-radius: 50% / 24%;
+  box-shadow:
+    inset 0 -24px 0 rgba(190, 24, 93, 0.15),
+    0 22px 45px rgba(190, 24, 93, 0.22);
+}
+
+.cake-bottom {
+  bottom: 90px;
+  width: 330px;
+  height: 125px;
+  background: linear-gradient(180deg, #fb7185, #be123c);
+}
+
+.cake-middle {
+  bottom: 170px;
+  width: 255px;
+  height: 105px;
+  background: linear-gradient(180deg, #fda4af, #e11d48);
+}
+
+.cake-top {
+  bottom: 238px;
+  width: 175px;
+  height: 82px;
+  background: linear-gradient(180deg, #fecdd3, #fb7185);
+}
+
+.cake-icing {
+  position: absolute;
+  left: 50%;
+  height: 32px;
+  transform: translateX(-50%) rotateX(58deg) rotateZ(-1deg);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fff7ed, #fed7aa);
+  box-shadow: 0 12px 24px rgba(251, 113, 133, 0.24);
+}
+
+.cake-icing-one {
+  bottom: 267px;
+  width: 185px;
+}
+
+.cake-icing-two {
+  bottom: 205px;
+  width: 265px;
+}
+
+.candle {
+  position: absolute;
+  bottom: 313px;
+  width: 18px;
+  height: 70px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(45deg, #fff, #fff 8px, #38bdf8 8px, #38bdf8 16px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.15);
+}
+
+.candle-one {
+  left: calc(50% - 42px);
+}
+
+.candle-two {
+  left: calc(50% + 24px);
+}
+
+.candle span {
+  position: absolute;
+  left: 50%;
+  top: -28px;
+  width: 24px;
+  height: 34px;
+  transform: translateX(-50%);
+  border-radius: 60% 60% 60% 20%;
+  background: radial-gradient(circle at 45% 35%, #fff7ad 0 22%, #facc15 23% 54%, #f97316 55% 100%);
+  filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.9));
+  animation: flame 0.9s ease-in-out infinite alternate;
+}
+
+.cake-label {
+  position: absolute;
+  left: 50%;
+  bottom: 130px;
+  transform: translateX(-50%) rotate(-2deg);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 10px 28px;
+  font-size: 28px;
+  font-weight: 950;
+  color: #be123c;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
+}
+
+@keyframes cake-float {
+  0%,
+  100% {
+    transform: translateY(0) rotateY(-4deg);
+  }
+
+  50% {
+    transform: translateY(-16px) rotateY(4deg);
+  }
+}
+
+@keyframes flame {
+  from {
+    transform: translateX(-50%) scale(0.94) rotate(-4deg);
+  }
+
+  to {
+    transform: translateX(-50%) scale(1.05) rotate(5deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .cake-stage {
+    min-height: 430px;
+    padding-inline: 0;
+  }
+
+  .cake-scene {
+    height: 390px;
+    transform: scale(0.82);
+    transform-origin: center bottom;
+  }
+
+  .skyline {
+    inset-inline: 4%;
+    gap: 8px;
+  }
+}
