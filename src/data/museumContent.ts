@@ -62,6 +62,70 @@ export const memories: Memory[] = [
   },
 ];
 
+export type PhotoCard = {
+  title: string;
+  caption: string;
+  imageSrc: string;
+  alt: string;
+};
+
+// EDIT HERE: Put your photo files in public/photos and update imageSrc values.
+// Example imageSrc: '/photos/first-memory.jpg'
+export const photoCards: PhotoCard[] = [
+  {
+    title: 'The first legendary photo',
+    caption: 'Replace this placeholder with a real photo and a caption only your friend would understand.',
+    imageSrc: '',
+    alt: 'Placeholder for a friendship memory photo',
+  },
+  {
+    title: 'The chaotic masterpiece',
+    caption: 'A perfect place for the photo that looks normal to strangers but hilarious to both of you.',
+    imageSrc: '',
+    alt: 'Placeholder for a funny friendship photo',
+  },
+  {
+    title: 'The soft memory',
+    caption: 'Use this card for a calm, warm, emotional photo that deserves its own museum wall.',
+    imageSrc: '',
+    alt: 'Placeholder for an emotional friendship photo',
+  },
+  {
+    title: 'The birthday evidence',
+    caption: 'Add a birthday photo here later, or keep it as a cute empty frame.',
+    imageSrc: '',
+    alt: 'Placeholder for a birthday photo',
+  },
+];
+
+export type BirthdayCelebration = {
+  headline: string;
+  dateLabel: string;
+  age: number;
+  intro: string;
+  highlights: string[];
+  wishes: string[];
+};
+
+// EDIT HERE: Customize this birthday section for your friend.
+export const birthdayCelebration: BirthdayCelebration = {
+  headline: 'Happy birthday',
+  dateLabel: 'Birthday exhibit',
+  age: 25,
+  intro: 'Today is officially about celebrating you, your chaos, your kindness, your glow, and every little reason people are lucky to know you.',
+  highlights: [
+    'Another year of iconic memories',
+    'More laughter than the museum can safely store',
+    'A friend who keeps making life warmer',
+    'A future that deserves loud celebration',
+  ],
+  wishes: [
+    'May this year bring you peace, confidence, health, and the kind of happiness that feels easy.',
+    'May your dreams get closer, your stress get lighter, and your favorite people stay close.',
+    'May you always remember that you are appreciated more than you realize.',
+  ],
+};
+
 // EDIT HERE: Add, remove, or rewrite compliments. The generator chooses randomly from this array.
 export const compliments: string[] = [
   'You have elite-level best friend energy. Scientists are confused. I am simply grateful.',
@@ -165,6 +229,8 @@ export const museumStats = [
 
 export const navItems = [
   { label: 'Timeline', href: '#timeline', icon: MapPin },
+  { label: 'Photos', href: '#photos', icon: Camera },
+  { label: 'Birthday', href: '#birthday', icon: Gift },
   { label: 'Compliments', href: '#compliments', icon: Sparkles },
   { label: 'Jokes', href: '#jokes', icon: Laugh },
   { label: 'Quiz', href: '#quiz', icon: Trophy },
