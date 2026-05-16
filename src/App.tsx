@@ -39,6 +39,16 @@ const jihadeMessage = [
   'This can become your personal note, your birthday wish, or a small dedication that stays on the page behind the memories.',
 ];
 
+function MissingPhotoNotice({ src, label, large = false }: { src?: string; label: string; large?: boolean }) {
+  return (
+    <div className={`photo-placeholder${large ? ' big' : ''}`}>
+      <Camera className="h-10 w-10" />
+      <span>{src ? 'Photo file not found' : 'Photo space'}</span>
+      <small>{src ? `Missing ${src}` : label}</small>
+    </div>
+  );
+}
+
 function PhotoSlot({ title, caption, src }: { title: string; caption: string; src: string }) {
   const [failed, setFailed] = useState(false);
   const showImage = src && !failed;
@@ -49,11 +59,7 @@ function PhotoSlot({ title, caption, src }: { title: string; caption: string; sr
         {showImage ? (
           <img src={src} alt={title} onError={() => setFailed(true)} />
         ) : (
-          <div className="photo-placeholder">
-            <Camera className="h-10 w-10" />
-            <span>Photo space</span>
-            <small>Ready for the real picture</small>
-          </div>
+          <MissingPhotoNotice src={src} label="Ready for the real picture" />
         )}
       </div>
       <div className="p-5">
@@ -72,13 +78,7 @@ function ElbeImageFrame() {
     return <img src={elbePhoto.src} alt={elbePhoto.title} onError={() => setFailed(true)} className="h-full w-full object-cover" />;
   }
 
-  return (
-    <div className="photo-placeholder big">
-      <Camera className="h-12 w-12" />
-      <span>Elbe photo space</span>
-      <small>Ready for the real picture</small>
-    </div>
-  );
+  return <MissingPhotoNotice src={elbePhoto?.src} label="Ready for the real picture" large />;
 }
 
 function CakeScene() {
