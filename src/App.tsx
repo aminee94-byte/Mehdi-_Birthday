@@ -74,7 +74,7 @@ function CakeScene() {
           <div className="pill"><Sparkles className="h-4 w-4" /> Made by {senderName} for {birthdayBoy}</div>
           <h1>Mehdi turns 25</h1>
           <p>
-            A birthday page with a 3D cake, Dresden, the Elbe, your real photos, wishes in the background, and a personal message from Amine.
+            A private birthday celebration for Mehdi, with Dresden, the Elbe, real memories, birthday wishes, and a message from Amine.
           </p>
           <div className="hero-actions">
             <a href="#elbe">Elbe photo</a>
@@ -83,16 +83,31 @@ function CakeScene() {
         </div>
 
         <div className="cake-card">
-          <div className="cake-scene-new" aria-label="3D cake showing 25 years for Mehdi">
+          <div className="cake-scene-new" aria-label="Realistic birthday cake showing 25 years for Mehdi">
             <div className="number-topper">25</div>
             <div className="years-ribbon">years</div>
             <div className="flame flame-left" />
             <div className="flame flame-right" />
             <div className="candle-new candle-left" />
             <div className="candle-new candle-right" />
-            <div className="cake-layer cake-layer-top" />
-            <div className="cake-layer cake-layer-middle" />
-            <div className="cake-layer cake-layer-bottom" />
+            <div className="cake-layer cake-layer-top">
+              <span className="cream-drop drop-a" />
+              <span className="cream-drop drop-b" />
+              <span className="cream-drop drop-c" />
+            </div>
+            <div className="cake-layer cake-layer-middle">
+              <span className="cream-drop drop-d" />
+              <span className="cream-drop drop-e" />
+              <span className="cream-drop drop-f" />
+            </div>
+            <div className="cake-layer cake-layer-bottom">
+              <span className="cream-drop drop-g" />
+              <span className="cream-drop drop-h" />
+              <span className="cream-drop drop-i" />
+            </div>
+            <div className="cake-berries" aria-hidden="true">
+              <span /><span /><span /><span /><span />
+            </div>
             <div className="cake-front-name">Mehdi</div>
             <div className="cake-plate" />
           </div>
@@ -144,7 +159,7 @@ export default function App() {
         <div className="section-heading light">
           <div className="pill dark"><Camera className="h-4 w-4" /> Our pictures</div>
           <h2>Our photo wall</h2>
-          <p>The page is now wired to show the real photos from your zip through src/data/photos.ts.</p>
+          <p>Real memories from the birthday photo collection.</p>
         </div>
         <div className="photo-grid">
           {visiblePhotos.map((slot) => <PhotoSlot key={slot.title} {...slot} />)}
