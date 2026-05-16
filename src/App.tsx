@@ -1,4 +1,5 @@
 import { Camera, Heart, MapPin, Sparkles } from 'lucide-react';
+import { birthdayPhotos, elbePhoto } from './data/photos';
 
 const birthdayBoy = 'Mehdi';
 const senderName = 'Amine';
@@ -15,28 +16,14 @@ const wishes = [
   'A special birthday corner for Jihade',
 ];
 
-const photoSlots = [
-  {
-    title: 'Our photo over the Elbe',
-    caption: 'Put here the picture of you together near the Elbe or any Dresden memory.',
-    imageSrc: '',
-  },
-  {
-    title: 'Mehdi birthday photo',
-    caption: 'A birthday picture, cake picture, or the most important photo of the day.',
-    imageSrc: '',
-  },
-  {
-    title: 'Amine and Mehdi',
-    caption: 'A personal photo from Amine to Mehdi, something that feels real.',
-    imageSrc: '',
-  },
-  {
-    title: 'Jihade memory',
-    caption: 'A place for Jihade, a message, a photo, or a shared birthday moment.',
-    imageSrc: '',
-  },
+const fallbackPhotos = [
+  { title: 'Our photo over the Elbe', caption: 'Photo from the birthday zip will appear here.', src: '' },
+  { title: 'Mehdi birthday photo', caption: 'Photo from the birthday zip will appear here.', src: '' },
+  { title: 'Amine and Mehdi', caption: 'Photo from the birthday zip will appear here.', src: '' },
+  { title: 'Jihade memory', caption: 'Photo from the birthday zip will appear here.', src: '' },
 ];
+
+const visiblePhotos = birthdayPhotos.length > 0 ? birthdayPhotos : fallbackPhotos;
 
 const amineMessage = [
   'Mehdi, happy 25th birthday my brother.',
@@ -51,17 +38,17 @@ const jihadeMessage = [
   'This can become your personal note, your birthday wish, or a small dedication that stays on the page behind the memories.',
 ];
 
-function PhotoSlot({ title, caption, imageSrc }: { title: string; caption: string; imageSrc: string }) {
+function PhotoSlot({ title, caption, src }: { title: string; caption: string; src: string }) {
   return (
     <article className="photo-card group">
       <div className="photo-window">
-        {imageSrc ? (
-          <img src={imageSrc} alt={title} />
+        {src ? (
+          <img src={src} alt={title} />
         ) : (
           <div className="photo-placeholder">
             <Camera className="h-10 w-10" />
             <span>Add photo</span>
-            <small>public/photos</small>
+            <small>src/data/photos.ts</small>
           </div>
         )}
       </div>
@@ -87,7 +74,7 @@ function CakeScene() {
           <div className="pill"><Sparkles className="h-4 w-4" /> Made by {senderName} for {birthdayBoy}</div>
           <h1>Mehdi turns 25</h1>
           <p>
-            A birthday page with a 3D cake, Dresden, the Elbe, our photos, wishes in the background, and a personal message from Amine.
+            A birthday page with a 3D cake, Dresden, the Elbe, your real photos, wishes in the background, and a personal message from Amine.
           </p>
           <div className="hero-actions">
             <a href="#elbe">Elbe photo</a>
@@ -122,26 +109,24 @@ function ElbeSection() {
         <div className="pill"><MapPin className="h-4 w-4" /> Dresden over the Elbe</div>
         <h2>A picture over the Elbe</h2>
         <p>
-          This section is built like a Dresden postcard. Put your real Elbe photo inside the frame and it becomes the emotional center of the page.
+          This section is built like a Dresden postcard. Your selected photo from the zip appears in the frame.
         </p>
       </div>
 
       <div className="elbe-postcard">
-        <div className="elbe-skyline" aria-hidden="true">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
+        <div className="elbe-skyline" aria-hidden="true"><span /><span /><span /><span /><span /></div>
         <div className="river" aria-hidden="true" />
         <div className="bridge" aria-hidden="true" />
         <div className="elbe-photo-frame">
-          <div className="photo-placeholder big">
-            <Camera className="h-12 w-12" />
-            <span>Add your Elbe photo here</span>
-            <small>Example path: /photos/elbe.jpg</small>
-          </div>
+          {elbePhoto?.src ? (
+            <img src={elbePhoto.src} alt={elbePhoto.title} className="h-full w-full object-cover" />
+          ) : (
+            <div className="photo-placeholder big">
+              <Camera className="h-12 w-12" />
+              <span>Add your Elbe photo here</span>
+              <small>src/data/photos.ts</small>
+            </div>
+          )}
         </div>
         <div className="postcard-label">Dresden, Germany</div>
       </div>
@@ -153,21 +138,16 @@ export default function App() {
   return (
     <main className="site-shell">
       <CakeScene />
-
       <ElbeSection />
 
       <section className="photos-section" id="photos">
         <div className="section-heading light">
           <div className="pill dark"><Camera className="h-4 w-4" /> Our pictures</div>
           <h2>Our photo wall</h2>
-          <p>
-            The uploaded zip has no image files, so I created four real photo slots. Add your pictures in public/photos and put their paths in App.tsx.
-          </p>
+          <p>The page is now wired to show the real photos from your zip through src/data/photos.ts.</p>
         </div>
         <div className="photo-grid">
-          {photoSlots.map((slot) => (
-            <PhotoSlot key={slot.title} {...slot} />
-          ))}
+          {visiblePhotos.map((slot) => <PhotoSlot key={slot.title} {...slot} />)}
         </div>
       </section>
 
@@ -176,9 +156,7 @@ export default function App() {
           <div className="pill"><Heart className="h-4 w-4" /> Birthday message from {senderName}</div>
           <h2>For Mehdi</h2>
           <div className="message-text">
-            {amineMessage.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            {amineMessage.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
           <div className="signature">Amine</div>
         </div>
@@ -191,9 +169,7 @@ export default function App() {
             <h2>For {specialName}</h2>
           </div>
           <div className="message-text light-text">
-            {jihadeMessage.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            {jihadeMessage.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </div>
       </section>
