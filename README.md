@@ -2,7 +2,7 @@
 
 A beautiful, warm, funny, mobile-friendly personal gift website built with React, Vite, TypeScript, Tailwind CSS, Framer Motion, and Lucide React icons.
 
-The site is designed as a mini digital museum dedicated to a close friend. It includes a landing page, memory timeline, photo gallery, birthday celebration, compliment generator, inside joke archive, friendship quiz, future letter, and a secret final message that unlocks after the quiz.
+The site is designed as a mini digital museum dedicated to a close friend. It includes a landing page, memory timeline, compliment generator, inside joke archive, friendship quiz, future letter, and a secret final message that unlocks after the quiz.
 
 ## Tech stack
 
@@ -64,40 +64,11 @@ You can edit:
 
 - Friend name or nickname: `friendName`
 - Five memory cards: `memories`
-- Photo gallery cards and image paths: `photoCards`
-- Birthday age, date, wishes, and celebration copy: `birthdayCelebration`
 - Compliment generator messages: `compliments`
 - Inside joke cards: `jokes`
 - Friendship quiz questions and answers: `quizQuestions`
 - Future letter text: `futureLetter`
 - Secret final message: `finalMessage`
-
-### Adding photos
-
-1. Put your image files inside:
-
-```text
-public/photos/
-```
-
-2. Open `src/data/museumContent.ts`.
-3. Find the `photoCards` array.
-4. Set `imageSrc` to the public path for your image:
-
-```ts
-imageSrc: '/photos/birthday-photo.jpg'
-```
-
-If `imageSrc` is empty, the site shows a polished placeholder card instead of a broken image.
-
-### Editing the 25th birthday section
-
-Open `src/data/museumContent.ts` and edit `birthdayCelebration`. It currently uses:
-
-- Age: `25`
-- Date label: `May 24, 2026`
-
-You can change the headline, birthday wishes, and highlight cards there.
 
 ### Editing quiz answers
 
@@ -118,9 +89,6 @@ In this example, `correctAnswer: 3` means the fourth option, `All of them`, is c
 ## Project structure
 
 ```text
-public/
-  photos/
-    README.md
 src/
   App.tsx
   main.tsx
@@ -128,12 +96,10 @@ src/
   data/
     museumContent.ts
   components/
-    BirthdayCelebration.tsx
     ComplimentGenerator.tsx
     FriendshipQuiz.tsx
     FutureLetter.tsx
     JokeArchive.tsx
-    PhotoGallery.tsx
     Landing.tsx
     SecretMessage.tsx
     SectionHeader.tsx

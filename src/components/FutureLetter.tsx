@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail } from 'lucide-react';
+import { MailHeart } from 'lucide-react';
 import { futureLetter } from '../data/museumContent';
 import { SectionHeader } from './SectionHeader';
 
@@ -11,7 +11,7 @@ export function FutureLetter() {
           eyebrow="Future letter"
           title={futureLetter.title}
           description="A warm note for goals, dreams, confidence, career, gym, studies, and the life still unfolding."
-          icon={Mail}
+          icon={MailHeart}
         />
         <motion.article
           initial={{ opacity: 0, y: 28 }}
