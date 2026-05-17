@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Camera, Heart, MapPin, Sparkles } from 'lucide-react';
-import { birthdayPhotos, elbePhoto } from './data/photos';
+import { Camera, Heart, Sparkles } from 'lucide-react';
+import { birthdayPhotos } from './data/photos';
 
 const birthdayBoy = 'Mehdi';
 const senderName = 'Amine';
@@ -18,9 +18,9 @@ const wishes = [
 ];
 
 const fallbackPhotos = [
-  { title: 'Our photo over the Elbe', caption: 'A place for the Elbe picture.', src: '' },
   { title: 'Mehdi birthday photo', caption: 'A place for Mehdi’s birthday picture.', src: '' },
   { title: 'Amine and Mehdi', caption: 'A place for a memory with Amine and Mehdi.', src: '' },
+  { title: 'Friends together', caption: 'A place for a group memory.', src: '' },
   { title: 'Jihade memory', caption: 'A place for Jihade’s birthday memory.', src: '' },
 ];
 
@@ -28,7 +28,7 @@ const visiblePhotos = birthdayPhotos.length > 0 ? birthdayPhotos : fallbackPhoto
 
 const amineMessage = [
   'Mehdi, happy 25th birthday my brother.',
-  'I wanted this page to feel like something made for you, not a generic birthday card. A cake, Dresden, the Elbe, our memories, and a small corner for the people who matter in the story.',
+  'I wanted this page to feel like something made for you, not a generic birthday card. A cake, Dresden, our memories, and a small corner for the people who matter in the story.',
   'I hope this new year gives you peace, confidence, health, success, and moments that make you feel proud of who you are becoming.',
   'You are appreciated more than you probably notice. I hope this page reminds you of that every time you open it.',
   'From Amine, with love and respect.',
@@ -70,17 +70,6 @@ function PhotoSlot({ title, caption, src }: { title: string; caption: string; sr
   );
 }
 
-function ElbeImageFrame() {
-  const [failed, setFailed] = useState(false);
-  const showImage = elbePhoto?.src && !failed;
-
-  if (showImage) {
-    return <img src={elbePhoto.src} alt={elbePhoto.title} onError={() => setFailed(true)} className="h-full w-full object-cover" />;
-  }
-
-  return <MissingPhotoNotice src={elbePhoto?.src} label="Ready for the real picture" large />;
-}
-
 function CakeScene() {
   return (
     <section className="hero-scene">
@@ -95,7 +84,7 @@ function CakeScene() {
           <div className="pill"><Sparkles className="h-4 w-4" /> Made by {senderName} for {birthdayBoy}</div>
           <h1>Mehdi turns 25</h1>
           <div className="hero-actions">
-            <a href="#elbe">Elbe photo</a>
+            <a href="#photos">See the photos</a>
             <a href="#message">Read the message</a>
           </div>
         </div>
@@ -135,32 +124,10 @@ function CakeScene() {
   );
 }
 
-function ElbeSection() {
-  return (
-    <section className="elbe-section" id="elbe">
-      <div className="section-heading">
-        <div className="pill"><MapPin className="h-4 w-4" /> Dresden over the Elbe</div>
-        <h2>A picture over the Elbe</h2>
-      </div>
-
-      <div className="elbe-postcard">
-        <div className="elbe-skyline" aria-hidden="true"><span /><span /><span /><span /><span /></div>
-        <div className="river" aria-hidden="true" />
-        <div className="bridge" aria-hidden="true" />
-        <div className="elbe-photo-frame">
-          <ElbeImageFrame />
-        </div>
-        <div className="postcard-label">Dresden, Germany</div>
-      </div>
-    </section>
-  );
-}
-
 export default function App() {
   return (
     <main className="site-shell">
       <CakeScene />
-      <ElbeSection />
 
       <section className="photos-section" id="photos">
         <div className="section-heading light">
