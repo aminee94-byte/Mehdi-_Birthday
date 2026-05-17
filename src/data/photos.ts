@@ -2,84 +2,75 @@ export type BirthdayPhoto = { title: string; caption: string; src: string };
 
 export const birthdayPhotos: BirthdayPhoto[] = [
   {
-    title: 'The birthday friendship shot',
-    caption: 'The strongest opening photo: close, happy, personal, and perfect for the first card.',
+    title: 'Birthday night with the boys',
+    caption: 'A fun group selfie from the celebration night. This one belongs at the top because it feels alive and personal.',
     src: '/photos/mehdi-photo-07.webp',
   },
   {
-    title: 'Sharp formal memory',
-    caption: 'A clean formal photo that gives the page a polished birthday feeling.',
+    title: 'Formal hall moment',
+    caption: 'A sharp photo of Amine and Mehdi inside the hall before the celebration started.',
     src: '/photos/mehdi-photo-09.webp',
   },
   {
-    title: 'The auditorium moment',
-    caption: 'A warm formal memory with a strong composition and good light.',
+    title: 'Auditorium memory',
+    caption: 'A clean photo from the auditorium, with both of you looking dressed up and serious for once.',
     src: '/photos/mehdi-photo-10.webp',
   },
   {
-    title: 'Looking sharp at 25',
-    caption: 'A vertical formal picture that works well as a birthday portrait.',
+    title: 'Big smile with Mehdi',
+    caption: 'A close selfie full of good energy, perfect for showing the friendship side of the page.',
     src: '/photos/mehdi-photo-08.webp',
   },
   {
-    title: 'Seated celebration moment',
-    caption: 'A relaxed picture from the same formal day, good for adding variety.',
+    title: 'Street mirror moment',
+    caption: 'A creative outdoor mirror photo from a sunny day in Dresden.',
     src: '/photos/mehdi-photo-14.webp',
   },
   {
-    title: 'Night out energy',
-    caption: 'A colorful party photo that brings movement and celebration to the wall.',
+    title: 'Elevator mirror selfie',
+    caption: 'A casual mirror photo with winter jackets and everyday friendship energy.',
     src: '/photos/mehdi-photo-05.webp',
   },
   {
-    title: 'The fun group shot',
-    caption: 'A chaotic, friendly photo that makes the page feel real and personal.',
+    title: 'Room hangout',
+    caption: 'A relaxed indoor moment with friends, funny and natural.',
     src: '/photos/mehdi-photo-12.webp',
   },
   {
-    title: 'Room gathering',
-    caption: 'A casual memory with the boys, good for the personal side of the page.',
+    title: 'Formal selfie with Mehdi',
+    caption: 'A clean close-up selfie from the formal evening.',
     src: '/photos/mehdi-photo-11.webp',
   },
   {
     title: 'Sunny barbecue memory',
-    caption: 'An outdoor memory that adds a bright daytime feeling to the gallery.',
+    caption: 'A bright outdoor barbecue day with friends and good food.',
     src: '/photos/mehdi-photo-01.webp',
   },
   {
-    title: 'Outdoor group memory',
-    caption: 'A relaxed street photo that keeps the gallery connected to real life.',
-    src: '/photos/mehdi-photo-02.webp',
-  },
-  {
-    title: 'Balcony memory',
-    caption: 'A casual outdoor picture with a natural background and personal feeling.',
+    title: 'Auditorium selfie',
+    caption: 'A seated selfie from the hall, another strong memory from the formal day.',
     src: '/photos/mehdi-photo-15.webp',
   },
   {
-    title: 'Dresden mirror detail',
-    caption: 'A creative mirror photo that works well as a smaller visual detail.',
+    title: 'Funny room selfie',
+    caption: 'A playful indoor picture with the boys, full of chaotic energy.',
     src: '/photos/mehdi-photo-13.webp',
   },
   {
     title: 'Rainy day selfie',
-    caption: 'A simple rainy day memory that adds a softer mood to the collection.',
+    caption: 'A softer rainy-day memory with friends under the umbrella.',
     src: '/photos/mehdi-photo-03.webp',
   },
   {
     title: 'Club memory',
-    caption: 'A colorful late night photo kept lower in the gallery because it is blurrier.',
+    caption: 'A colorful night-out photo with party lights and birthday energy.',
     src: '/photos/mehdi-photo-06.webp',
   },
   {
-    title: 'Elevator mirror memory',
-    caption: 'A quiet everyday photo kept as the final personal detail.',
+    title: 'Umbrella memory',
+    caption: 'A rainy outdoor selfie that adds a real Dresden everyday feeling.',
     src: '/photos/mehdi-photo-04.webp',
   },
 ];
 
-export const elbePhoto: BirthdayPhoto = {
-  title: 'Dresden over the Elbe',
-  caption: 'The Dresden panorama for the Elbe postcard section.',
-  src: '/photos/dresden-panorama.webp',
-};
+export const elbePhoto: BirthdayPhoto | undefined = undefined;
