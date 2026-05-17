@@ -1,8 +1,8 @@
 /* Dresden panorama and realistic cake overrides */
 .hero-scene {
   background-image:
-    linear-gradient(90deg, rgba(8,3,15,.92) 0%, rgba(8,3,15,.75) 42%, rgba(8,3,15,.40) 100%),
-    url('/photos/dresden-elbe-bg.webp');
+    linear-gradient(90deg, rgba(8,3,15,.90) 0%, rgba(8,3,15,.68) 42%, rgba(8,3,15,.30) 100%),
+    url('/photos/gettyimages-545872471-612x612.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -12,7 +12,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 72% 48%, rgba(255,255,255,.18), transparent 22%), linear-gradient(180deg, rgba(8,3,15,.05), rgba(8,3,15,.58));
+  background: radial-gradient(circle at 72% 48%, rgba(255,255,255,.16), transparent 22%), linear-gradient(180deg, rgba(8,3,15,.05), rgba(8,3,15,.55));
   pointer-events: none;
 }
 
@@ -105,10 +105,4 @@
 
 .candle-new {
   background: repeating-linear-gradient(45deg, #fff7ed, #fff7ed 8px, #e11d48 8px, #e11d48 16px);
-}
-
-.elbe-postcard {
-  background-image: linear-gradient(180deg, rgba(125,211,252,.10) 0%, rgba(253,230,138,.10) 52%, rgba(15,23,42,.20) 53%, rgba(30,58,138,.25) 100%), url('/photos/dresden-elbe-bg.webp');
-  background-size: cover;
-  background-position: center;
 }
