@@ -82,7 +82,7 @@ function CakeScene() {
       <div className="hero-content">
         <div className="hero-copy">
           <div className="pill"><Sparkles className="h-4 w-4" /> Made by {senderName} for {birthdayBoy}</div>
-          <h1>Mehdi turns 25</h1>
+          <h1>Happy Birthday Mehdi 🎂</h1>
           <div className="hero-actions">
             <a href="#photos">See the photos</a>
             <a href="#message">Read the message</a>
