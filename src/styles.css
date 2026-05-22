@@ -129,20 +129,21 @@ a, button { -webkit-tap-highlight-color: transparent; }
   width: 420px; height: 420px;
   top: -80px; left: -120px;
   background: #fb7185;
+  opacity: .22;
   animation: orb-drift-a 28s ease-in-out infinite;
 }
 .orb-amber {
   width: 340px; height: 340px;
   top: 40%; right: -100px;
   background: #fbbf24;
-  opacity: .22;
+  opacity: .14;
   animation: orb-drift-b 34s ease-in-out infinite;
 }
 .orb-blue {
   width: 380px; height: 380px;
   bottom: -120px; left: 30%;
   background: #38bdf8;
-  opacity: .25;
+  opacity: .16;
   animation: orb-drift-c 40s ease-in-out infinite;
 }
 @keyframes orb-drift-a {
@@ -168,7 +169,24 @@ a, button { -webkit-tap-highlight-color: transparent; }
   align-items: center;
   padding: 72px 24px;
   overflow: hidden;
-  background-image: linear-gradient(90deg, rgba(8, 3, 15, .90) 0%, rgba(8, 3, 15, .68) 42%, rgba(8, 3, 15, .30) 100%);
+  background-image:
+    linear-gradient(180deg, rgba(8, 3, 15, .82) 0%, rgba(8, 3, 15, .72) 45%, rgba(8, 3, 15, .92) 100%),
+    linear-gradient(90deg, rgba(8, 3, 15, .85) 0%, rgba(8, 3, 15, .55) 42%, rgba(8, 3, 15, .35) 100%),
+    url('/dresden-hero.jpg');
+  background-size: cover, cover, cover;
+  background-position: center, center, center 25%;
+  background-repeat: no-repeat;
+}
+/* extra tint vignette on top of Dresden so text always stays legible */
+.hero-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(244, 63, 94, .18), transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(56, 189, 248, .10), transparent 55%);
+  pointer-events: none;
+  z-index: 1;
 }
 .wish-wall {
   position: absolute;
@@ -177,9 +195,10 @@ a, button { -webkit-tap-highlight-color: transparent; }
   grid-template-columns: repeat(4, minmax(180px, 1fr));
   gap: 22px;
   padding: 36px;
-  opacity: .14;
+  opacity: .08;
   transform: rotate(-8deg) scale(1.12);
   pointer-events: none;
+  z-index: 1;
 }
 .wish-wall span {
   border: 1px solid rgba(255, 255, 255, .16);
@@ -210,6 +229,79 @@ a, button { -webkit-tap-highlight-color: transparent; }
   line-height: .88;
   letter-spacing: -.08em;
   font-weight: 1000;
+}
+
+/* New hero title — multi-line with gradient */
+.hero-eyebrow {
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .65);
+}
+.hero-year-badge {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(254, 205, 211, .14);
+  border: 1px solid rgba(254, 205, 211, .35);
+  color: #fecdd3;
+  font-weight: 1000;
+  letter-spacing: .14em;
+}
+.hero-eyebrow-dot {
+  color: rgba(255, 255, 255, .35);
+}
+
+.hero-title {
+  margin: 18px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 1000;
+  letter-spacing: -.09em;
+  line-height: .86;
+}
+.hero-title-line {
+  font-size: clamp(58px, 9vw, 132px);
+  background: linear-gradient(180deg, #fff 0%, #fff 55%, #fecdd3 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 14px 60px rgba(0, 0, 0, .6);
+}
+.hero-title-line.line-2 {
+  background: linear-gradient(180deg, #fff 0%, #fecdd3 70%, #fb7185 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.hero-title-line.line-3 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.hero-name {
+  background: linear-gradient(180deg, #fecdd3 0%, #fb7185 60%, #e11d48 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-style: italic;
+  letter-spacing: -.06em;
+}
+.hero-cake-emoji {
+  display: inline-block;
+  font-size: .58em;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .5));
+  animation: cake-bob 2.4s ease-in-out infinite;
+  -webkit-text-fill-color: initial;
+}
+@keyframes cake-bob {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
 }
 .hero-arabic {
   margin: 18px 0 0;
@@ -279,15 +371,65 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .cake-card {
   position: relative;
   min-height: 660px;
-  border: 1px solid rgba(255, 255, 255, .18);
+  border: 1px solid rgba(255, 255, 255, .22);
   border-radius: 48px;
   background:
+    radial-gradient(circle at 50% 25%, rgba(254, 205, 211, .14), transparent 30%),
     radial-gradient(circle at 50% 18%, rgba(255, 255, 255, .28), transparent 22%),
-    linear-gradient(145deg, rgba(255, 255, 255, .16), rgba(255, 255, 255, .05));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 30px 90px rgba(0, 0, 0, .45), 0 0 90px rgba(244, 63, 94, .22);
+    linear-gradient(145deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .04));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .3),
+    0 30px 90px rgba(0, 0, 0, .55),
+    0 0 90px rgba(244, 63, 94, .28);
   overflow: hidden;
   perspective: 1200px;
   backdrop-filter: blur(18px);
+}
+
+/* Glowing halo behind cake */
+.cake-halo {
+  position: absolute;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  width: 580px;
+  height: 580px;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(251, 191, 36, .28) 0%, rgba(244, 63, 94, .22) 30%, transparent 65%);
+  filter: blur(20px);
+  animation: halo-pulse 4s ease-in-out infinite;
+  z-index: 0;
+}
+@keyframes halo-pulse {
+  0%, 100% { opacity: .8; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.06); }
+}
+
+/* Sparkles drifting around the cake */
+.cake-sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+.spark {
+  position: absolute;
+  font-size: 22px;
+  color: #fff;
+  text-shadow: 0 0 14px rgba(251, 191, 36, .8);
+  opacity: 0;
+  animation: spark-drift 5s ease-in-out infinite;
+}
+.spark-1 { left: 12%; top: 18%; font-size: 24px; animation-delay: .2s; }
+.spark-2 { right: 14%; top: 12%; font-size: 20px; animation-delay: 1.2s; color: #fecdd3; }
+.spark-3 { right: 8%; top: 38%; font-size: 18px; animation-delay: 2.1s; }
+.spark-4 { left: 8%; top: 60%; font-size: 22px; animation-delay: 3s; color: #facc15; }
+.spark-5 { left: 50%; top: 8%; font-size: 28px; animation-delay: 1.7s; }
+@keyframes spark-drift {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(.7) rotate(0); }
+  20% { opacity: 1; transform: translateY(-8px) scale(1) rotate(15deg); }
+  60% { opacity: .7; transform: translateY(-18px) scale(.9) rotate(-10deg); }
+  100% { opacity: 0; transform: translateY(-30px) scale(.6) rotate(0); }
 }
 .cake-interactive {
   cursor: pointer;
@@ -382,14 +524,34 @@ a, button { -webkit-tap-highlight-color: transparent; }
 .flame {
   position: absolute;
   bottom: 461px;
-  width: 26px; height: 36px;
+  width: 32px; height: 46px;
   border-radius: 60% 60% 60% 20%;
   background: radial-gradient(circle at 45% 35%, #fff7ad 0 22%, #facc15 23% 54%, #f97316 55% 100%);
-  filter: drop-shadow(0 0 18px rgba(251, 191, 36, .95));
-  animation: flame-dance .85s ease-in-out infinite alternate, flame-in .25s ease;
+  filter: drop-shadow(0 0 24px rgba(251, 191, 36, 1)) drop-shadow(0 0 8px rgba(249, 115, 22, .8));
+  animation: flame-dance .85s ease-in-out infinite alternate, flame-in .3s ease;
+  z-index: 4;
 }
-.flame-left { left: calc(50% - 90px); }
-.flame-right { left: calc(50% + 68px); }
+.flame-left { left: calc(50% - 93px); }
+.flame-right { left: calc(50% + 65px); }
+
+/* extra ambient light glow around each lit candle */
+.flame-glow {
+  position: absolute;
+  bottom: 442px;
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, .55) 0%, rgba(251, 191, 36, .18) 28%, transparent 60%);
+  filter: blur(8px);
+  pointer-events: none;
+  animation: flame-glow-pulse 1.6s ease-in-out infinite alternate;
+  z-index: 3;
+}
+.flame-glow-left { left: calc(50% - 132px); }
+.flame-glow-right { left: calc(50% + 26px); }
+@keyframes flame-glow-pulse {
+  from { opacity: .75; transform: scale(.95); }
+  to { opacity: 1; transform: scale(1.08); }
+}
 @keyframes scene-sway {
   0%, 100% { transform: translateY(0) rotateY(-3deg); }
   50% { transform: translateY(-18px) rotateY(4deg); }
@@ -401,6 +563,15 @@ a, button { -webkit-tap-highlight-color: transparent; }
 @keyframes flame-in {
   from { transform: scale(0); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+
+/* Slight darkening of cake when all candles out — like the room dimmed */
+.cake-interactive.all-out .cake-halo { opacity: .3; }
+.cake-interactive.all-out .cake-layer-bottom,
+.cake-interactive.all-out .cake-layer-middle,
+.cake-interactive.all-out .cake-layer-top {
+  filter: brightness(.85);
+  transition: filter .5s ease;
 }
 
 .wish-overlay {

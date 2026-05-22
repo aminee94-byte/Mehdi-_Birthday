@@ -35,8 +35,8 @@ const entries: Entry[] = [
   { index: 24, year: 2026 },
   { index: 25, year: 2026 },
   { index: 26, year: 2026 },
-  { index: 27, year: null },
-  { index: 28, year: null },
+  { index: 27, year: 2024 },  // BBQ outside church — summer 2024
+  { index: 28, year: 2023 },  // Christmas market with fairy lights — Dec 2023
 ];
 
 const pad = (n: number) => String(n).padStart(2, '0');
@@ -59,7 +59,6 @@ export const yearLabels: YearLabel[] = [
   { year: 2024, title: '2024', subtitle: 'The year of everything' },
   { year: 2025, title: '2025', subtitle: 'Quieter, still us' },
   { year: 2026, title: '2026', subtitle: 'Right up to now' },
-  { year: null, title: 'And these ones', subtitle: 'No date, still ours' },
 ];
 
 export type GroupedPhotos = { label: YearLabel; photos: BirthdayPhoto[] };

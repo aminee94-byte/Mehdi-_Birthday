@@ -24,6 +24,25 @@ const MEHDI_BIRTH_ISO = '2001-05-23';
 const SONG_SRC = '/audio/twenty-five-shining-through.mp3';
 const SONG_TITLE = 'Twenty-Five, Shining Through';
 
+// =========================================================================
+//   SONG PLACEMENT — change this one value to move the song card anywhere:
+//     'after-hero'   → right under the cake (current default)
+//     'after-stats'  → after the "days alive" stats strip
+//     'before-photos' → just before the photo timeline
+//     'after-photos' → between photos and the Arabic message
+//     'after-message' → after the Arabic message, before the share row
+//     'hidden'       → no big song card; only the floating mini-player
+//   The floating mini-player always stays in the bottom-right regardless.
+// =========================================================================
+type SongPlacement =
+  | 'after-hero'
+  | 'after-stats'
+  | 'before-photos'
+  | 'after-photos'
+  | 'after-message'
+  | 'hidden';
+const SONG_PLACEMENT: SongPlacement = 'after-hero';
+
 const wishes = [
   'Happy 25th birthday Mehdi',
   'May this year bring you peace',
@@ -98,7 +117,19 @@ function CakeScene({
       <div className="hero-content">
         <div className="hero-copy">
           <div className="pill"><Sparkles className="h-4 w-4" /> Made by {senderName} for {birthdayBoy}</div>
-          <h1>Happy Birthday Mehdi 🎂</h1>
+          <div className="hero-eyebrow">
+            <span className="hero-year-badge">2026</span>
+            <span className="hero-eyebrow-dot" aria-hidden="true">·</span>
+            <span>Dresden edition</span>
+          </div>
+          <h1 className="hero-title">
+            <span className="hero-title-line line-1">Happy</span>
+            <span className="hero-title-line line-2">Birthday</span>
+            <span className="hero-title-line line-3">
+              <span className="hero-name">Mehdi</span>
+              <span className="hero-cake-emoji" aria-hidden="true">🎂</span>
+            </span>
+          </h1>
           <p className="hero-arabic" lang="ar" dir="rtl">عيد ميلاد سعيد يا مهدي</p>
           <p className="hero-hint">Tap the cake to blow out the candles ✨</p>
           <div className="hero-actions">
@@ -114,11 +145,21 @@ function CakeScene({
           onClick={onCakeTap}
           aria-label="Tap the cake to blow out the candles"
         >
+          <div className="cake-halo" aria-hidden="true" />
+          <div className="cake-sparkles" aria-hidden="true">
+            <span className="spark spark-1">✨</span>
+            <span className="spark spark-2">✦</span>
+            <span className="spark spark-3">✨</span>
+            <span className="spark spark-4">✦</span>
+            <span className="spark spark-5">·</span>
+          </div>
           <div className="cake-scene-new" aria-hidden="true">
             <div className="number-topper">25</div>
             <div className="years-ribbon">years</div>
             {cakeState.leftLit && <div className="flame flame-left" />}
             {cakeState.rightLit && <div className="flame flame-right" />}
+            {cakeState.leftLit && <div className="flame-glow flame-glow-left" />}
+            {cakeState.rightLit && <div className="flame-glow flame-glow-right" />}
             <div className="candle-new candle-left" />
             <div className="candle-new candle-right" />
             <div className="cake-layer cake-layer-top">
@@ -658,6 +699,20 @@ export default function App() {
     });
   }, []);
 
+  // We need an audio element always mounted so play state survives even when the
+  // big song card is hidden. So we render the <audio> here once and let the
+  // SongSection share the same ref.
+  const songCard = (
+    <SongSection isPlaying={isPlaying} togglePlay={togglePlay} audioRef={audioRef} />
+  );
+
+  // Hidden mount for the audio element when SONG_PLACEMENT='hidden'.
+  // Mounted-then-shown via the SongSection's <audio> tag normally; for 'hidden'
+  // we need it somewhere so the ref attaches.
+  const hiddenAudio = (
+    <audio ref={audioRef} src={SONG_SRC} preload="metadata" style={{ display: 'none' }} />
+  );
+
   return (
     <>
       {!opened && <Envelope onOpen={openEnvelope} />}
@@ -666,17 +721,27 @@ export default function App() {
         <CakeScene cakeState={cake} onCakeTap={onCakeTap} />
         <ConfettiBurst burstKey={burstKey} />
 
+        {SONG_PLACEMENT === 'after-hero' && songCard}
+
         <StatStrip />
 
-        <SongSection isPlaying={isPlaying} togglePlay={togglePlay} audioRef={audioRef} />
+        {SONG_PLACEMENT === 'after-stats' && songCard}
+
+        {SONG_PLACEMENT === 'before-photos' && songCard}
 
         <PhotoTimeline onOpenLightbox={openLightbox} />
 
+        {SONG_PLACEMENT === 'after-photos' && songCard}
+
         <MessageSection />
+
+        {SONG_PLACEMENT === 'after-message' && songCard}
 
         <ShareRow />
 
         <footer>Made by {senderName} for {birthdayBoy}. Dresden birthday edition.</footer>
+
+        {SONG_PLACEMENT === 'hidden' && hiddenAudio}
       </main>
 
       {lightboxIdx !== null && (
