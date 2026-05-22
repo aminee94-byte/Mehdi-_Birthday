@@ -43,16 +43,6 @@ type SongPlacement =
   | 'hidden';
 const SONG_PLACEMENT: SongPlacement = 'after-hero';
 
-const wishes = [
-  'Happy 25th birthday Mehdi',
-  'May this year bring you peace',
-  'May Dresden always feel like a good memory',
-  'May your heart stay light and your future stay bright',
-  'May every hard day turn into a story you survived',
-  'May you always know that you are appreciated',
-  'From Amine with love and respect',
-];
-
 const arabicMessageParagraphs = [
   'صديقي العزيز مهدي،',
   'أتمنى لك عيد ميلاد سعيد، وأن يدخل عليك هذا العام بكل الخير والفرحة والسعادة. إن شاء الله تحقق كل ما تتمناه، وتكون سنواتك القادمة أجمل وأفضل مما مضى.',
@@ -101,12 +91,6 @@ function CakeScene({
   const allOut = !cakeState.leftLit && !cakeState.rightLit;
   return (
     <section className="hero-scene">
-      <div className="wish-wall" aria-hidden="true">
-        {[...wishes, ...wishes].map((wish, index) => (
-          <span key={`${wish}-${index}`}>{wish}</span>
-        ))}
-      </div>
-
       {/* Slow drifting background orbs (#9 breathing background) */}
       <div className="bg-orbs" aria-hidden="true">
         <span className="orb orb-rose" />
@@ -262,15 +246,35 @@ function StatStrip() {
 // =========================================================================
 //   SONG SECTION
 // =========================================================================
+function formatTime(s: number) {
+  if (!isFinite(s) || s < 0) s = 0;
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return `${m}:${String(sec).padStart(2, '0')}`;
+}
+
 function SongSection({
   isPlaying,
   togglePlay,
   audioRef,
+  currentTime,
+  duration,
+  onSeek,
 }: {
   isPlaying: boolean;
   togglePlay: () => void;
   audioRef: React.RefObject<HTMLAudioElement | null>;
+  currentTime: number;
+  duration: number;
+  onSeek: (time: number) => void;
 }) {
+  const progressPct = duration > 0 ? (currentTime / duration) * 100 : 0;
+
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTime = (parseFloat(e.target.value) / 100) * duration;
+    onSeek(newTime);
+  };
+
   return (
     <section className="song-section" id="song">
       <div className="song-card">
@@ -293,6 +297,27 @@ function SongSection({
             A little song made for your 25th. Press play, lean back, and let the next few minutes
             be just for you.
           </p>
+
+          <div className="song-progress">
+            <div className="song-times">
+              <span>{formatTime(currentTime)}</span>
+              <span>{formatTime(duration)}</span>
+            </div>
+            <div className="song-bar-wrap">
+              <div className="song-bar-fill" style={{ width: `${progressPct}%` }} />
+              <input
+                type="range"
+                className="song-bar-input"
+                min={0}
+                max={100}
+                step={0.1}
+                value={progressPct}
+                onChange={handleSeek}
+                aria-label="Seek song position"
+              />
+            </div>
+          </div>
+
           <audio ref={audioRef} src={SONG_SRC} preload="metadata" />
         </div>
       </div>
@@ -492,10 +517,9 @@ function FloatingPlayer({
 }
 
 // =========================================================================
-//   ARABIC MESSAGE + P.S. EASTER EGG (#5)
+//   ARABIC MESSAGE
 // =========================================================================
 function MessageSection() {
-  const [psOpen, setPsOpen] = useState(false);
   return (
     <section className="message-section" id="message">
       <div className="message-card arabic-card">
@@ -505,25 +529,6 @@ function MessageSection() {
           {arabicMessageParagraphs.map((paragraph, i) => <p key={i}>{paragraph}</p>)}
         </div>
         <div className="signature">Amine</div>
-
-        <button
-          type="button"
-          className={`ps-button${psOpen ? ' is-open' : ''}`}
-          onClick={() => setPsOpen(v => !v)}
-          aria-expanded={psOpen}
-          lang="ar"
-          dir="rtl"
-        >
-          {psOpen ? '· إخفاء ·' : 'P.S. — اضغط هنا'}
-        </button>
-        {psOpen && (
-          <div className="ps-reveal" lang="ar" dir="rtl">
-            <p>
-              كل سنة وأنت طيب يا أخي. الصداقة معك من أجمل الأشياء اللي صارت في حياتي، ومهما الأيام
-              تعدّي، تبقى هذي الذكريات معنا. هاد الموقع صغير، بس قلبي فيه أكبر بكثير. 🤍
-            </p>
-          </div>
-        )}
       </div>
     </section>
   );
@@ -582,6 +587,8 @@ export default function App() {
   const [cake, setCake] = useState<CakeState>({ leftLit: true, rightLit: true, wishMade: false });
   const [burstKey, setBurstKey] = useState(0);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   // Smooth fade volume (#10)
   const fadeTo = useCallback((target: number, durationMs: number) => {
@@ -623,6 +630,13 @@ export default function App() {
     setIsMuted(audio.muted);
   }, []);
 
+  const seekTo = useCallback((time: number) => {
+    const audio = audioRef.current;
+    if (!audio || !isFinite(time)) return;
+    audio.currentTime = time;
+    setCurrentTime(time);
+  }, []);
+
   // Restore last play position (#10)
   useEffect(() => {
     const audio = audioRef.current;
@@ -648,22 +662,29 @@ export default function App() {
       setIsPlaying(false);
       localStorage.removeItem('mehdi.song.time');
     };
+    const onTimeUpdate = () => setCurrentTime(audio.currentTime);
+    const onLoadedMeta = () => setDuration(audio.duration || 0);
     audio.addEventListener('play', onPlay);
     audio.addEventListener('pause', onPause);
     audio.addEventListener('ended', onEnded);
+    audio.addEventListener('timeupdate', onTimeUpdate);
+    audio.addEventListener('loadedmetadata', onLoadedMeta);
+    audio.addEventListener('durationchange', onLoadedMeta);
     return () => {
       audio.removeEventListener('play', onPlay);
       audio.removeEventListener('pause', onPause);
       audio.removeEventListener('ended', onEnded);
+      audio.removeEventListener('timeupdate', onTimeUpdate);
+      audio.removeEventListener('loadedmetadata', onLoadedMeta);
+      audio.removeEventListener('durationchange', onLoadedMeta);
     };
   }, []);
 
-  // Envelope opens → start the song (#2)
+  // Envelope opens → just reveal the site. The user starts the song themselves
+  // by tapping the play button — no auto-play.
   const openEnvelope = useCallback(() => {
     setOpened(true);
-    // Delay slightly so the envelope animation runs before the music
-    setTimeout(() => startSong(), 600);
-  }, [startSong]);
+  }, []);
 
   // Tap the cake → blow out a candle, confetti, eventually "make a wish" (#3)
   const onCakeTap = useCallback(() => {
@@ -703,7 +724,14 @@ export default function App() {
   // big song card is hidden. So we render the <audio> here once and let the
   // SongSection share the same ref.
   const songCard = (
-    <SongSection isPlaying={isPlaying} togglePlay={togglePlay} audioRef={audioRef} />
+    <SongSection
+      isPlaying={isPlaying}
+      togglePlay={togglePlay}
+      audioRef={audioRef}
+      currentTime={currentTime}
+      duration={duration}
+      onSeek={seekTo}
+    />
   );
 
   // Hidden mount for the audio element when SONG_PLACEMENT='hidden'.
