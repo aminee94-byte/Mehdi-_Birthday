@@ -1,11 +1,14 @@
 /* Dresden panorama and realistic cake overrides */
 .hero-scene {
   background-image:
-    linear-gradient(90deg, rgba(8,3,15,.90) 0%, rgba(8,3,15,.68) 42%, rgba(8,3,15,.30) 100%),
-    url('/photos/gettyimages-545872471-612x612.jpg');
+    linear-gradient(90deg, rgba(8,3,15,.90) 0%, rgba(8,3,15,.68) 42%, rgba(8,3,15,.30) 100%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.wish-wall {
+  display: none !important;
 }
 
 .hero-scene::after {
@@ -18,6 +21,11 @@
 
 .cake-card {
   background: radial-gradient(circle at 50% 18%, rgba(255,255,255,.34), transparent 22%), linear-gradient(145deg, rgba(255,255,255,.22), rgba(255,255,255,.07));
+}
+
+.cake-card::before {
+  content: none !important;
+  display: none !important;
 }
 
 .cake-layer {
